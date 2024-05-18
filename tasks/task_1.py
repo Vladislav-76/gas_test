@@ -12,6 +12,7 @@ lastname|name|patronymic|date_of_birth|id
 
 
 import csv
+from collections import defaultdict
 from pathlib import Path
 
 
@@ -19,10 +20,14 @@ FILEDIR = f"{Path(__file__).parent}/data_files/task_1/"
 DELIMITER = "|"
 
 
+class NoIdError(Exception):
+    pass
+
+
 """
 Реализация для файлов разумного размера.
 Если строки файла не помещаются в питоновскую структуру данных,
-реализация будет существенно сложнее с подключением БД.
+реализация будет сложнее.
 """
 
 
@@ -30,13 +35,46 @@ def get_uniq_rows(filename="file.csv"):
     with open(file=FILEDIR + filename, encoding="utf-8") as file:
         rows = csv.reader(file, delimiter=DELIMITER)
         columns = next(rows)
-        print(columns)
         uniq_rows = set()
         for row in rows:
             uniq_rows.add(tuple(row))
     return uniq_rows, columns
 
 
-if __name__ == "__main__":
-    get_uniq_rows()
+def write_uniq_rows(filename="uniq_rows.csv"):
+    uniq_rows, columns = get_uniq_rows()
+    with open(file=FILEDIR + filename, mode="w", encoding="utf-8") as file:
+        writer = csv.writer(file, delimiter=DELIMITER)
+        writer.writerow(columns)
+        writer.writerows(uniq_rows)
 
+
+def get_multiply_rows_with_same_id(filename="file.csv"):
+    uniq_rows, columns = get_uniq_rows(filename)
+    if "id" in columns:
+        id_index = columns.index("id")
+    else:
+        raise NoIdError("В файле отсутствует колонка id")
+    rows_by_id = defaultdict(list)
+    for row in map(list, uniq_rows):
+        rows_by_id[list(row).pop(id_index)].append(row)
+    filtered_rows = []
+    for row_id, rows in rows_by_id.items():
+        if len(rows_by_id[row_id]) > 1:
+            for row in rows:
+                row.insert(id_index, row_id)
+                filtered_rows.append(row)
+    return filtered_rows, columns
+
+
+def write_multiply_rows_with_same_id(filename="multiply_rows_with_same_id.csv"):
+    multiply_rows, columns = get_multiply_rows_with_same_id()
+    with open(file=FILEDIR + filename, mode="w", encoding="utf-8") as file:
+        writer = csv.writer(file, delimiter=DELIMITER)
+        writer.writerow(columns)
+        writer.writerows(multiply_rows)
+
+
+if __name__ == "__main__":
+    write_uniq_rows()
+    write_multiply_rows_with_same_id()
