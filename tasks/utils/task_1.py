@@ -1,8 +1,9 @@
 import csv
 from datetime import date
-from faker import Faker
 from pathlib import Path
-from random import randint, choice
+from random import choice, randint
+
+from faker import Faker
 
 FILEDIR = f"{Path(__file__).resolve().parents[1]}/data_files/task_1/"
 COLUMNS = ("lastname", "name", "patronymic", "date_of_birth", "id")

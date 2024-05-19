@@ -1,0 +1,19 @@
+2024-05-19 16:47:29,206 - ERROR - HTTPSConnectionPool(host='api.gazprombank.ru', port=443): Max retries exceeded with url: /very/important/docs?documents_date=1716076800.0 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f34617102e0>, 'Connection to api.gazprombank.ru timed out. (connect timeout=1)'))
+2024-05-19 16:47:29,206 - ERROR - Ошибка валидации строки:
+['value1', 'value2', 'value3']
+2 validation errors for VeryImportantDocument
+key1
+  Input should be a valid integer, unable to parse string as an integer [type=int_parsing, input_value='value1', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.7/v/int_parsing
+key2
+  Input should be a valid datetime or date, input is too short [type=datetime_from_date_parsing, input_value='value2', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.7/v/datetime_from_date_parsing
+2024-05-19 16:47:29,207 - ERROR - Ошибка валидации строки:
+['value4', 'value5', 'value6']
+2 validation errors for VeryImportantDocument
+key1
+  Input should be a valid integer, unable to parse string as an integer [type=int_parsing, input_value='value4', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.7/v/int_parsing
+key2
+  Input should be a valid datetime or date, input is too short [type=datetime_from_date_parsing, input_value='value5', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.7/v/datetime_from_date_parsing

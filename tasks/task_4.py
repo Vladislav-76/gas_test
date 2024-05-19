@@ -7,7 +7,6 @@ import os
 from datetime import datetime, timedelta
 from pathlib import Path
 
-
 DIR_PATH = f"{Path(__file__).parent}/data_files/task_4/"
 OLDER_THEN_DAYS = 5
 FROM_MODIFY = True  # Если True, отсчет с момента изменения файлов, иначе с момента создания

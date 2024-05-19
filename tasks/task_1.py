@@ -15,7 +15,6 @@ import csv
 from collections import defaultdict
 from pathlib import Path
 
-
 FILEDIR = f"{Path(__file__).parent}/data_files/task_1/"
 DELIMITER = "|"
 

@@ -8,6 +8,9 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.10"
 faker = "^25.2.0"
+pydantic = "^2.7.1"
+requests = "^2.31.0"
+pandas = "^2.2.2"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^7.0.0"
